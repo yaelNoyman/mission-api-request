@@ -1,4 +1,12 @@
+@font-face {
+  font-family: Assistant;
+  src: local("Heebo"), local("Heebo-Regular"),
+    url("/fonts/Heebo-Regular.woff2") format("woff2"),
+    url("/fonts/Heebo-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: normal;
+}
+
 * {
   margin: 0;
-  font-family: Assistant;
 }
