@@ -1,68 +1,48 @@
 import { SearchBoxWrapper } from "./SearchBox.styled";
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { FC, useState, useEffect, ChangeEvent, memo } from "react";
 
 interface SearchBoxProps {
-  onChangeInput: (data: string) => void;
+  onChangeSearchValue: (searchValue: string) => void;
 }
 
-const SearchBox: FC<SearchBoxProps> = ({ onChangeInput }: SearchBoxProps) => {
-  const CLEAN_ICON = "/icons/clear-icon.svg";
-  const SEARCH_ICON = "/icons/search-icon.svg";
+const SearchBox: FC<SearchBoxProps> = memo(
+  ({ onChangeSearchValue }: SearchBoxProps) => {
+    const [searchValue, setSearchValue] = useState<string>("");
 
-  const [term, setTerm] = useState<string>("");
-  const [isFocused, setIsFocused] = useState(false);
-  const [isShowDeleteIcon, setIsShowDeleteIcon] = useState<boolean>(false);
+    const SEARCH_ICON = "/icons/search-icon.svg";
+    const X_ICON = "/icons/clear-icon.svg";
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
+    useEffect(() => {
+      onChangeSearchValue(searchValue);
+    }, [searchValue, onChangeSearchValue]);
 
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
+    const changeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(() => e.target.value);
+    };
 
-  const onClearInput = () => {
-    setTerm(() => "");
-  };
-
-  useEffect(() => {
-    if (term === "") {
-      setIsShowDeleteIcon(() => false);
-    } else {
-      setIsShowDeleteIcon(() => true);
-    }
-
-    onChangeInput(term);
-  }, [term, onChangeInput]);
-
-  const onChangeTerm = (e: ChangeEvent<HTMLInputElement>) => {
-    setTerm(() => e.target.value);
-  };
-
-  return (
-    <>
-      <SearchBoxWrapper $isFocused={isFocused} $term={term}>
+    return (
+      <SearchBoxWrapper $searchvalue={searchValue} data-testid="SearchBox">
         <div className="input-wrapper">
+          <div className="search-icon">
+            <img src={SEARCH_ICON} />
+          </div>
           <input
-            value={term}
-            onBlur={handleBlur}
+            type="text"
+            value={searchValue}
             placeholder="חיפוש"
-            onFocus={handleFocus}
-            onChange={onChangeTerm}
-            className="search-input"
+            className="custom-input"
+            onChange={changeSearchValue}
           />
-          <img src={SEARCH_ICON} className="search-icon" />
-          {isShowDeleteIcon && (
-            <img
-              src={CLEAN_ICON}
-              className="clean-icon"
-              onClick={onClearInput}
-            />
-          )}
+          <div
+            className="clean-button"
+            onClick={() => setSearchValue(() => "")}
+          >
+            <img className="x-icon" src={X_ICON} />
+          </div>
         </div>
       </SearchBoxWrapper>
-    </>
-  );
-};
+    );
+  }
+);
 
 export default SearchBox;

@@ -11,7 +11,8 @@ export const ButtonWrapper = styled.button<{
   display: flex;
   height: auto;
   width: ${(props) => props.$width || "auto"};
-  padding: 8px 12px;
+  padding: 12px;
+  font-size: 16px;
   justify-content: ${(props) => (props.$iconSrc ? "flex-start" : "center")};
   align-items: center;
   gap: 8px;
@@ -37,10 +38,11 @@ export const ButtonWrapper = styled.button<{
         `}
 
   border-radius: 8px;
-  font-family: Open Sans;
+  /* font-family: Open Sans; */
 
   img {
-    height: 24px;
+    width: 22px;
+    height: 21px;
   }
 
   .text {

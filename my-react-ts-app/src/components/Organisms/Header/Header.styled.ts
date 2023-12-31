@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.div`
   gap: 33px;
   color: #fff;
+  width: 100%;
   height: 86px;
-  width: 1440px;
   display: flex;
   padding: 0 29px;
   font-size: 32px;

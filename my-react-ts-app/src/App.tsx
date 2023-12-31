@@ -1,12 +1,10 @@
 import "./App.css";
-import Header from "./components/Organisms/Header/Header";
-import HeaderBar from "./components/Organisms/HeaderBar/HeaderBar";
+import HomePage from "./components/Pages/HomePage/HomePage";
 
 function App() {
   return (
     <>
-      <Header iconSrc="/icons/Group8.svg" title="HORIZON TEAM" />
-      <HeaderBar />
+      <HomePage />
     </>
   );
 }
