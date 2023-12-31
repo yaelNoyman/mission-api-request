@@ -3,11 +3,11 @@ import { ButtonWrapper } from "./Button.styled";
 
 interface ButtonProps {
   text: string;
+  $width?: string;
   $color?: string;
   $iconSrc?: string;
   onClick: () => void;
   $outlined?: boolean;
-  $width?: string;
   $backgroundColor?: string;
   $disable?: boolean;
 }
