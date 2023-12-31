@@ -1,7 +1,7 @@
 import { BodyWrapper } from "./Body.styled";
 import PostCard from "../../Molecules/PostCard/PostCard";
 
-function HomePage() {
+function Body() {
   return (
     <BodyWrapper>
       <PostCard content="post" />
@@ -9,4 +9,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Body;

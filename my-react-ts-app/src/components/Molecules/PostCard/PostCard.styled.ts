@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const PostCardWrapper = styled.div`
-  width: 80%;
-  height: 40%;
+  width: 95%;
+  height: 450px;
   padding: 8px;
   flex-shrink: 0;
-  border-radius: 24px;
+  border-radius: 18px;
   background-color: #ffffff;
 
   .post-buttons {
