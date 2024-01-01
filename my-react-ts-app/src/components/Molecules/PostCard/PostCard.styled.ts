@@ -2,16 +2,17 @@ import styled from "styled-components";
 
 export const PostCardWrapper = styled.div`
   width: 95%;
-  height: 450px;
-  padding: 8px;
-  flex-shrink: 0;
+  padding: 25px;
   border-radius: 18px;
   background-color: #ffffff;
+  position: relative;
 
   .post-buttons {
     gap: 10px;
+    left: 25px;
+    height: auto;
     display: flex;
-    align-items: start;
+    position: absolute;
   }
 
   .post-content {

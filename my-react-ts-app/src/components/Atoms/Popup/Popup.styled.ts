@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const PopupWrapper = styled.div<{
-  $backgroundHeader?: string;
   $colorTextHeader?: string;
+  $backgroundHeader?: string;
   $backgroungCloseButton?: string;
 }>`
   .popup-header {
@@ -69,7 +69,7 @@ export const PopupWrapper = styled.div<{
   .popup-footer {
     height: 60px;
     display: flex;
-    padding: 14px 14px;
+    padding: 12px 21px;
     align-items: center;
     background-color: white;
     justify-content: flex-end;

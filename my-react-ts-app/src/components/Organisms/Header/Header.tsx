@@ -10,7 +10,7 @@ const Header: FC<HeaderProps> = ({ iconSrc, title }) => {
   return (
     <HeaderWrapper>
       <img src={iconSrc} />
-      <p>{title}</p>
+      <div className="title">{title}</div>
     </HeaderWrapper>
   );
 };
