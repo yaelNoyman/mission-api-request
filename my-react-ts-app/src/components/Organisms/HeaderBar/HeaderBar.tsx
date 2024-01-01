@@ -1,15 +1,25 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import Popup from "../../Atoms/Popup/Popup";
 import Button from "../../Atoms/Button/Button";
 import { HeaderBarWrapper } from "./HeaderBar.styled";
-import SearchBox from "../../Molecules/SearchBox/SearchBox";
+import TextField from "../../Atoms/TextField/TextField";
 import PopupBehavior from "../../Behavior/PopupBehavior";
+import SearchBox from "../../Molecules/SearchBox/SearchBox";
 
-const HeaderBar = () => {
+interface HeaderBarProps {
+  onChangeSearchValue: (value: string) => void;
+}
+
+const HeaderBar: FC<HeaderBarProps> = ({ onChangeSearchValue }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [newPost, setNewPost] = useState({
+    title: "",
+    body: "",
+  });
 
   const handleSearchInputChange = (value: string) => {
-    console.log("Search input changed:", value);
+    // console.log("Search input changed:", value);
+    onChangeSearchValue(value);
   };
   const handleButtonChange = () => {
     console.log("add");
@@ -18,6 +28,22 @@ const HeaderBar = () => {
   const handleClosePopup = () => {
     setPopupVisible(false);
   };
+  const handleInputChange = (field: string, value: string) => {
+    setNewPost((prevPost) => ({
+      ...prevPost,
+      [field]: value,
+    }));
+  };
+  const handleAddPost = () => {
+    console.log("New Post:", newPost);
+
+    setNewPost({
+      title: "",
+      body: "",
+    });
+    setPopupVisible(false);
+  };
+
   return (
     <HeaderBarWrapper>
       <SearchBox onChangeSearchValue={handleSearchInputChange} />
@@ -44,7 +70,7 @@ const HeaderBar = () => {
                 $width="140px"
                 $color="#0453C8"
                 $backgroundColor="#FFF"
-                onClick={handleButtonChange}
+                onClick={handleClosePopup}
               />
             }
             submitButton={
@@ -53,11 +79,27 @@ const HeaderBar = () => {
                 $width="140px"
                 $color="#FFF"
                 $backgroundColor="#0453C8"
-                onClick={handleButtonChange}
+                onClick={handleAddPost}
               />
             }
             title="הוספת פוסט חדש"
-            children="הוספת פוסט חדש"
+            children={
+              <div className="edit-post">
+                <TextField
+                  label="כותרת"
+                  placeholder="הקלד כאן כותרת..."
+                  showCloseButton={true}
+                  onChange={(value) => handleInputChange("title", value)}
+                />
+                <TextField
+                  label="תוכן"
+                  rows={3}
+                  showCloseButton={true}
+                  onChange={(value) => handleInputChange("body", value)}
+                  placeholder="הקלד כאן תוכן..."
+                />
+              </div>
+            }
             closelick={handleClosePopup}
             $backgroundHeader="#0453C8"
           />

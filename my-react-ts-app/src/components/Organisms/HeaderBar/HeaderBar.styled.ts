@@ -5,13 +5,17 @@ export const HeaderBarWrapper = styled.div`
   width: 100%;
   height: 20%;
   display: flex;
-  align-items: center;
-  justify-content: center;
   direction: rtl;
-  font-family: Open Sans;
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
+  font-style: normal;
   line-height: normal;
+  align-items: center;
+  font-family: Open Sans;
+  justify-content: center;
   background: rgba(4, 83, 200, 0.16);
+
+  .edit-post {
+    padding: 10px;
+  }
 `;
