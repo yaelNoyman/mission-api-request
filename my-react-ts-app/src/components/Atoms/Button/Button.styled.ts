@@ -37,7 +37,7 @@ export const ButtonWrapper = styled.button<{
           color: ${$color || "var(--grayscale-grayscale-white, #fff)"};
         `}
 
-  border-radius: 8px;
+  border-radius: 15px;
   /* font-family: Open Sans; */
 
   img {

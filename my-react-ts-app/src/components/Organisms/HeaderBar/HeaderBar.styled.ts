@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderBarWrapper = styled.div`
-  padding-top: 10%;
-  /* top: 800px; */
+  padding-top: 7.5%;
   gap: 30px;
   width: 100%;
   height: 35%;
