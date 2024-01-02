@@ -3,6 +3,7 @@ import { TextFieldWrapper } from "./TextField.styled";
 
 interface TextFieldProps {
   rows?: number;
+  value?: string;
   label: string;
   $width?: string;
   placeholder: string;
@@ -14,6 +15,7 @@ const TextField: FC<TextFieldProps> = ({
   placeholder,
   label,
   $width,
+  value,
   rows = 1,
   onChange,
   showCloseButton = false,
@@ -53,6 +55,7 @@ const TextField: FC<TextFieldProps> = ({
           onFocus={handleFocus}
           placeholder={placeholder}
           onChange={handleInputChange}
+          defaultValue={value}
         />
         {inputValue && showCloseButton && isFocused && (
           <img

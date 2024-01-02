@@ -47,6 +47,27 @@ function HomePage() {
     handleSearchInputChange(searchValue);
   }, [searchValue]);
 
+  const handleEditPost = (
+    id: number,
+    editedTitle: string,
+    editedContent: string
+  ) => {
+    const updatedPosts = data.map((post) =>
+      post.id === id
+        ? { ...post, title: editedTitle, body: editedContent }
+        : post
+    );
+    setData(updatedPosts);
+  };
+
+  const handleDeletePost = (id: number) => {
+    const updatedPosts = filteredPosts.filter((post) => post.id !== id);
+
+    setTimeout(() => {
+      setFilteredPosts(updatedPosts);
+    }, 2000);
+  };
+
   return (
     <HomePageWrapper>
       <Header iconSrc="/icons/Group8.svg" title="HORIZON TEAM" />
@@ -56,7 +77,14 @@ function HomePage() {
         }}
       />
       {filteredPosts.map((post) => (
-        <PostCard key={post.id} title={post.title} content={post.body} />
+        <PostCard
+          id={post.id}
+          key={post.id}
+          title={post.title}
+          content={post.body}
+          onEditPost={handleEditPost}
+          onDeletePost={handleDeletePost}
+        />
       ))}
     </HomePageWrapper>
   );

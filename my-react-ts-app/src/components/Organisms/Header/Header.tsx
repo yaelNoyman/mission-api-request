@@ -7,9 +7,13 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ iconSrc, title }) => {
+  const handleIconClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <HeaderWrapper>
-      <img src={iconSrc} />
+      <img src={iconSrc} onClick={handleIconClick} />
       <div className="title">{title}</div>
     </HeaderWrapper>
   );

@@ -1,18 +1,40 @@
-import { FC, useState } from "react";
 import Popup from "../../Atoms/Popup/Popup";
 import Button from "../../Atoms/Button/Button";
+import { FC, useState, useEffect } from "react";
 import { PostCardWrapper } from "./PostCard.styled";
 import TextField from "../../Atoms/TextField/TextField";
 import PopupBehavior from "../../Behavior/PopupBehavior";
+import Notification from "../../Atoms/Notification/Notification";
 
 interface PostCardProps {
+  id: number;
   title: string;
   content: string;
+  onDeletePost: (id: number) => void;
+  onEditPost: (id: number, editedTitle: string, editedContent: string) => void;
 }
 
-const PostCard: FC<PostCardProps> = ({ content, title }) => {
+const PostCard: FC<PostCardProps> = ({
+  id,
+  content,
+  title,
+  onEditPost,
+  onDeletePost,
+}) => {
   const [isEditPopupVisible, setEditPopupVisible] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(title);
+  const [editedContent, setEditedContent] = useState(content);
   const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+  const [notification, setNotification] = useState<{
+    message: string;
+    backgroundColor: string;
+  }>({ message: "", backgroundColor: "" });
+  const [showNotification, setShowNotification] = useState(false);
+
+  useEffect(() => {
+    setEditedTitle(title);
+    setEditedContent(content);
+  }, [title, content]);
 
   const handleButtonEditChange = () => {
     console.log("edit");
@@ -21,18 +43,60 @@ const PostCard: FC<PostCardProps> = ({ content, title }) => {
 
   const handleButtonDeleteChange = () => {
     console.log("delete");
+    setEditedTitle(editedTitle);
+    setEditedContent(editedContent);
     setDeletePopupVisible(true);
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    if (field === "title") {
+      setEditedTitle(value);
+    } else if (field === "content") {
+      setEditedContent(value);
+    }
+  };
+
+  const handleSaveChanges = () => {
+    if (editedTitle !== title || editedContent !== content) {
+      console.log("Save Changes:", { id, editedTitle, editedContent });
+      onEditPost(id, editedTitle, editedContent);
+      setNotification({
+        message: "שינויים הועלו בהצלחה",
+        backgroundColor: "#E0CD88",
+      });
+      setShowNotification(true);
+    } else {
+      console.log("No changes to save");
+      setNotification({
+        message: "אין שינויים לשמירה",
+        backgroundColor: "#E0CD88",
+      });
+      setShowNotification(true);
+    }
+
+    setEditPopupVisible(false);
   };
 
   const handleCloseEditPopup = () => {
     setEditPopupVisible(false);
   };
 
-  const handleCloseDeletePopup = () => {
+  const handleDeletePost = () => {
+    setNotification({
+      message: "הפוסט נמחק בהצלחה",
+      backgroundColor: "#FE6666",
+    });
+    console.log("Delete Post:", id);
+    onDeletePost(id);
+    console.log("notification:", notification);
+    console.log("show notification:", showNotification);
+
+    setShowNotification(true);
     setDeletePopupVisible(false);
   };
-  const handleInputChange = (value: string) => {
-    console.log("Title changed:", value);
+
+  const handleCloseDeletePopup = () => {
+    setDeletePopupVisible(false);
   };
 
   return (
@@ -78,7 +142,7 @@ const PostCard: FC<PostCardProps> = ({ content, title }) => {
                 $width="140px"
                 $color="#FFF"
                 $backgroundColor="#0453C8"
-                onClick={handleButtonEditChange}
+                onClick={handleSaveChanges}
               />
             }
             title="עריכת פוסט"
@@ -86,16 +150,18 @@ const PostCard: FC<PostCardProps> = ({ content, title }) => {
               <div className="edit-post">
                 <TextField
                   label="כותרת"
-                  placeholder="הקלד כאן כותרת..."
+                  value={editedTitle}
                   showCloseButton={true}
-                  onChange={handleInputChange}
+                  placeholder={editedTitle}
+                  onChange={(value) => handleInputChange("title", value)}
                 />
                 <TextField
-                  label="תוכן"
                   rows={3}
+                  label="תוכן"
+                  value={editedContent}
                   showCloseButton={true}
-                  onChange={handleInputChange}
-                  placeholder="הקלד כאן תוכן..."
+                  placeholder={editedContent}
+                  onChange={(value) => handleInputChange("content", value)}
                 />
               </div>
             }
@@ -115,7 +181,7 @@ const PostCard: FC<PostCardProps> = ({ content, title }) => {
             descriptionTitle=""
             cancelButton={
               <Button
-                text="אישור"
+                text="ביטול"
                 $width="140px"
                 $color="#0453C8"
                 $backgroundColor="#FFF"
@@ -128,7 +194,7 @@ const PostCard: FC<PostCardProps> = ({ content, title }) => {
                 $width="140px"
                 $color="#FFF"
                 $backgroundColor="#0453C8"
-                onClick={handleButtonDeleteChange}
+                onClick={handleDeletePost}
               />
             }
             title="מחיקת פוסט"
@@ -136,6 +202,14 @@ const PostCard: FC<PostCardProps> = ({ content, title }) => {
             $backgroundHeader="#FF4C4C"
           />
         </PopupBehavior>
+      )}
+      {showNotification && (
+        <Notification
+          message={notification.message}
+          $backgroundColor={notification.backgroundColor}
+          setShowNotification={setShowNotification}
+          showNotification={showNotification}
+        />
       )}
     </PostCardWrapper>
   );

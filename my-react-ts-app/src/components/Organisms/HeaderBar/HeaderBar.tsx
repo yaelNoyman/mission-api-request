@@ -1,10 +1,11 @@
-import { FC, useState } from "react";
 import Popup from "../../Atoms/Popup/Popup";
 import Button from "../../Atoms/Button/Button";
+import { FC, useState, useEffect } from "react";
 import { HeaderBarWrapper } from "./HeaderBar.styled";
 import TextField from "../../Atoms/TextField/TextField";
 import PopupBehavior from "../../Behavior/PopupBehavior";
 import SearchBox from "../../Molecules/SearchBox/SearchBox";
+import Notification from "../../Atoms/Notification/Notification";
 
 interface HeaderBarProps {
   onChangeSearchValue: (value: string) => void;
@@ -12,13 +13,18 @@ interface HeaderBarProps {
 
 const HeaderBar: FC<HeaderBarProps> = ({ onChangeSearchValue }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [notification, setNotification] = useState<{
+    message: string;
+    backgroundColor: string;
+  }>({ message: "", backgroundColor: "" });
+  const [showNotification, setShowNotification] = useState(false);
   const [newPost, setNewPost] = useState({
+    userId: "1",
     title: "",
     body: "",
   });
 
   const handleSearchInputChange = (value: string) => {
-    // console.log("Search input changed:", value);
     onChangeSearchValue(value);
   };
   const handleButtonChange = () => {
@@ -36,13 +42,26 @@ const HeaderBar: FC<HeaderBarProps> = ({ onChangeSearchValue }) => {
   };
   const handleAddPost = () => {
     console.log("New Post:", newPost);
-
+    setNotification({
+      message: "הפוסט פורסם בהצלחה",
+      backgroundColor: "#7F99C1",
+    });
+    setShowNotification(true);
     setNewPost({
+      userId: "1",
       title: "",
       body: "",
     });
     setPopupVisible(false);
   };
+
+  useEffect(() => {
+    const notificationTimeout = setTimeout(() => {
+      setShowNotification(false);
+    }, 2000);
+
+    return () => clearTimeout(notificationTimeout);
+  }, [showNotification]);
 
   return (
     <HeaderBarWrapper>
@@ -104,6 +123,14 @@ const HeaderBar: FC<HeaderBarProps> = ({ onChangeSearchValue }) => {
             $backgroundHeader="#0453C8"
           />
         </PopupBehavior>
+      )}
+      {showNotification && (
+        <Notification
+          message={notification.message}
+          $backgroundColor={notification.backgroundColor}
+          setShowNotification={setShowNotification}
+          showNotification={showNotification}
+        />
       )}
     </HeaderBarWrapper>
   );

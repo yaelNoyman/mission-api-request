@@ -15,8 +15,9 @@ export const PostCardWrapper = styled.div`
   }
 
   .post-title {
+    height: auto;
     display: flex;
-    margin-top: 60px;
+    margin-top: 10%;
     font-weight: 700;
     justify-content: center;
   }
@@ -30,6 +31,8 @@ export const PostCardWrapper = styled.div`
   }
 
   .post-content {
+    margin-top: 20px;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
