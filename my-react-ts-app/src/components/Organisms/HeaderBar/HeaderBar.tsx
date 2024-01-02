@@ -104,12 +104,14 @@ const HeaderBar: FC<HeaderBarProps> = ({ onChangeSearchValue }) => {
             children={
               <div className="edit-post">
                 <TextField
+                  id="postTitle"
                   label="כותרת"
                   placeholder="הקלד כאן כותרת..."
                   showCloseButton={true}
                   onChange={(value) => handleInputChange("title", value)}
                 />
                 <TextField
+                  id="postBody"
                   label="תוכן"
                   rows={3}
                   showCloseButton={true}

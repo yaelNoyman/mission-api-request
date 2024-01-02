@@ -142,6 +142,7 @@ const PostCard: FC<PostCardProps> = ({
             children={
               <div className="edit-post">
                 <TextField
+                  id="postTitle"
                   label="כותרת"
                   value={editedTitle}
                   showCloseButton={true}
@@ -149,6 +150,7 @@ const PostCard: FC<PostCardProps> = ({
                   onChange={(value) => handleInputChange("title", value)}
                 />
                 <TextField
+                  id="postBody"
                   rows={3}
                   label="תוכן"
                   value={editedContent}

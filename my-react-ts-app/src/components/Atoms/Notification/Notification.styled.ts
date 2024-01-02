@@ -4,7 +4,7 @@ export const NotificationWrapper = styled.div<{
   $backgroundColor: string;
   isVisible: boolean;
 }>`
-  top: 12%;
+  top: 15%;
   margin: 0;
   height: 20%;
   width: 100%;

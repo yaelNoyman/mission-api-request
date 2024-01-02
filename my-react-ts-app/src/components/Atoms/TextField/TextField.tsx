@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useState } from "react";
 import { TextFieldWrapper } from "./TextField.styled";
 
 interface TextFieldProps {
+  id: string;
   rows?: number;
   value?: string;
   label: string;
@@ -13,6 +14,7 @@ interface TextFieldProps {
 
 const TextField: FC<TextFieldProps> = ({
   placeholder,
+  id,
   label,
   $width,
   value,
@@ -48,7 +50,7 @@ const TextField: FC<TextFieldProps> = ({
       <label>{label}</label>
       <div className="textField-container">
         <textarea
-          id="input"
+          id={`input ${id}`}
           rows={rows}
           value={inputValue}
           onBlur={handleBlur}
