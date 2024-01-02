@@ -28,7 +28,6 @@ const HeaderBar: FC<HeaderBarProps> = ({ onChangeSearchValue }) => {
     onChangeSearchValue(value);
   };
   const handleButtonChange = () => {
-    console.log("add");
     setPopupVisible(true);
   };
   const handleClosePopup = () => {
@@ -78,8 +77,8 @@ const HeaderBar: FC<HeaderBarProps> = ({ onChangeSearchValue }) => {
         <PopupBehavior
           isOpen={true}
           closeClick={handleClosePopup}
-          $width="60%"
-          $height="50%"
+          $width="50%"
+          $height="60%"
         >
           <Popup
             descriptionTitle=""

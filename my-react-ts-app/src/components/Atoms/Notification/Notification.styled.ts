@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
-export const NotificationWrapper = styled.div<{ $backgroundColor: string }>`
-  top: 15%;
+export const NotificationWrapper = styled.div<{
+  $backgroundColor: string;
+  isVisible: boolean;
+}>`
+  top: 12%;
   margin: 0;
   height: 20%;
   width: 100%;
   color: white;
   position: fixed;
   background-color: ${(props) => props.$backgroundColor};
-  display: ${(props: { isVisible: boolean }) =>
-    props.isVisible ? "block" : "none"};
+  display: ${(props) => (props.isVisible ? "block" : "none")};
 
   .message {
     display: flex;

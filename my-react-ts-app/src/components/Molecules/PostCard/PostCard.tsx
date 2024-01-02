@@ -37,12 +37,10 @@ const PostCard: FC<PostCardProps> = ({
   }, [title, content]);
 
   const handleButtonEditChange = () => {
-    console.log("edit");
     setEditPopupVisible(true);
   };
 
   const handleButtonDeleteChange = () => {
-    console.log("delete");
     setEditedTitle(editedTitle);
     setEditedContent(editedContent);
     setDeletePopupVisible(true);
@@ -58,7 +56,6 @@ const PostCard: FC<PostCardProps> = ({
 
   const handleSaveChanges = () => {
     if (editedTitle !== title || editedContent !== content) {
-      console.log("Save Changes:", { id, editedTitle, editedContent });
       onEditPost(id, editedTitle, editedContent);
       setNotification({
         message: "שינויים הועלו בהצלחה",
@@ -66,7 +63,6 @@ const PostCard: FC<PostCardProps> = ({
       });
       setShowNotification(true);
     } else {
-      console.log("No changes to save");
       setNotification({
         message: "אין שינויים לשמירה",
         backgroundColor: "#E0CD88",
@@ -86,10 +82,7 @@ const PostCard: FC<PostCardProps> = ({
       message: "הפוסט נמחק בהצלחה",
       backgroundColor: "#FE6666",
     });
-    console.log("Delete Post:", id);
     onDeletePost(id);
-    console.log("notification:", notification);
-    console.log("show notification:", showNotification);
 
     setShowNotification(true);
     setDeletePopupVisible(false);
@@ -121,8 +114,8 @@ const PostCard: FC<PostCardProps> = ({
         <PopupBehavior
           isOpen={true}
           closeClick={handleCloseEditPopup}
-          $width="60%"
-          $height="50%"
+          $width="50%"
+          $height="60%"
         >
           <Popup
             closelick={handleCloseEditPopup}
@@ -173,8 +166,8 @@ const PostCard: FC<PostCardProps> = ({
         <PopupBehavior
           isOpen={true}
           closeClick={handleCloseDeletePopup}
-          $width="60%"
-          $height="50%"
+          $width="50%"
+          $height="60%"
         >
           <Popup
             closelick={handleCloseDeletePopup}

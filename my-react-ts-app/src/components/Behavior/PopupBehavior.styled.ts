@@ -7,7 +7,6 @@ export const PopupBehaviorWrapper = styled.div<{
   top: 50%;
   left: 50%;
   z-index: 100;
-  height: auto;
   margin: auto;
   display: flex;
   overflow: visible;
@@ -16,6 +15,6 @@ export const PopupBehaviorWrapper = styled.div<{
   transform: translate(-50%, -50%);
   flex-direction: column;
   justify-content: space-between;
-  width: ${(props) => props.$width || "80%"};
+  width: ${(props) => props.$width || "60%"};
   height: ${(props) => props.$height || "auto"};
 `;

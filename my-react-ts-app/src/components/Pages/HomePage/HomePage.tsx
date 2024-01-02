@@ -36,7 +36,6 @@ function HomePage() {
   }, []);
 
   const handleSearchInputChange = (value: string) => {
-    console.log(value);
     const filtered = data.filter((post) =>
       post.title.toLowerCase().includes(value.toLowerCase())
     );

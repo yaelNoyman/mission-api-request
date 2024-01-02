@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderBarWrapper = styled.div`
   gap: 30px;
   width: 100%;
-  height: 20%;
+  height: 17%;
   display: flex;
   direction: rtl;
   font-size: 16px;
