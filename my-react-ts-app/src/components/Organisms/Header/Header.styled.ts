@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
-  position: sticky;
+  position: fixed;
   top: 0;
   gap: 20px;
   color: #fff;
@@ -12,7 +12,6 @@ export const HeaderWrapper = styled.div`
   padding: 0 29px;
   font-size: 32px;
   font-weight: 600;
-
   align-items: center;
   background-color: #444444;
 

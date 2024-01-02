@@ -1,20 +1,23 @@
 import styled from "styled-components";
 
 export const HeaderBarWrapper = styled.div`
+  padding-top: 10%;
+  /* top: 800px; */
   gap: 30px;
   width: 100%;
-  height: 20%;
-  display: flex;
+  height: 35%;
   direction: rtl;
   font-size: 16px;
   font-weight: 400;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(4, 83, 200, 0.16);
   font-style: normal;
   line-height: normal;
-  align-items: center;
   font-family: Open Sans;
-  justify-content: center;
-  background: rgba(4, 83, 200, 0.16);
-
   .edit-post {
     padding: 10px;
   }
